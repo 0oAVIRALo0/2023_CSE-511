@@ -1,0 +1,9 @@
+Import('*')
+
+SimObject('VectorOperations.py', sim_objects=['VectorOperations'])
+Source('vector_object.cc')
+
+DebugFlag('PrintVector')
+DebugFlag('VectorSubtraction')
+DebugFlag('VectorCrossProduct')
+DebugFlag('VectorNormalization')
