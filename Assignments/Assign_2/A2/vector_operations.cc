@@ -10,8 +10,8 @@
 
 namespace gem5
 {
-    int v1[3] = {1, 2, 3};
-    int v2[3] = {4, 5, 6};
+    float v1[3] = {1, 2, 3};
+    float v2[3] = {4, 5, 6};
 
 VectorOperations::VectorOperations(const VectorOperationsParams &params) : 
     SimObject(params), 
@@ -20,8 +20,8 @@ VectorOperations::VectorOperations(const VectorOperationsParams &params) :
     task3([this]{vectorSubtraction();}, name()), 
     latency(params.waitingTIME)
 {
-    DPRINTF(PrintVector, "Input vector 1: [ %d %d %d ] \n", v1[0], v1[1], v1[2]);
-    DPRINTF(PrintVector, "Input vector 2: [ %d %d %d ] \n", v2[0], v2[1], v2[2]);
+    DPRINTF(PrintVector, "Input vector 1: [ %f %f %f ] \n", v1[0], v1[1], v1[2]);
+    DPRINTF(PrintVector, "Input vector 2: [ %f %f %f ] \n", v2[0], v2[1], v2[2]);
 }
 
 void VectorOperations::startup()
@@ -33,22 +33,22 @@ void VectorOperations::startup()
 
 void VectorOperations::vectorCrossProduct()
 {
-    int result[3];
+    float result[3];
 
     result[0] = v1[1] * v2[2] - v1[2] * v2[1];
     result[1] = v1[2] * v2[0] - v1[0] * v2[2];
     result[2] = v1[0] * v2[1] - v1[1] * v2[0];
 
-    DPRINTF(VectorCrossProduct, "Vector Cross Product Result: [ %d, %d, %d ] \n", result[0], result[1], result[2]);
+    DPRINTF(VectorCrossProduct, "Vector Cross Product Result: [ %f, %f, %f ] \n", result[0], result[1], result[2]);
 }
 
 void VectorOperations::normalizeVector()
 {
-    int length1 = sqrt(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
-    int length2 = sqrt(v2[0] * v2[0] + v2[1] * v2[1] + v2[2] * v2[2]);
+    float length1 = sqrt(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
+    float length2 = sqrt(v2[0] * v2[0] + v2[1] * v2[1] + v2[2] * v2[2]);
 
-    int normalized1[3];
-    int normalized2[3];
+    float normalized1[3];
+    float normalized2[3];
 
     for (int i = 0; i < 3; ++i)
     {
@@ -56,20 +56,20 @@ void VectorOperations::normalizeVector()
         normalized2[i] = v2[i] / length2;
     }
 
-    DPRINTF(VectorNormalization, "Normalized Vector 1: [ %d, %d, %d ] \n", normalized1[0], normalized1[1], normalized1[2]);
-    DPRINTF(VectorNormalization, "Normalized Vector 2: [ %d, %d, %d ] \n", normalized2[0], normalized2[1], normalized2[2]);
+    DPRINTF(VectorNormalization, "Normalized Vector 1: [ %f, %f, %f ] \n", normalized1[0], normalized1[1], normalized1[2]);
+    DPRINTF(VectorNormalization, "Normalized Vector 2: [ %f, %f, %f ] \n", normalized2[0], normalized2[1], normalized2[2]);
 }
 
 void VectorOperations::vectorSubtraction()
 {
-    int result[3];
+    float result[3];
 
     for (int i = 0; i < 3; ++i)
     {
         result[i] = v1[i] - v2[i];
     }
 
-    DPRINTF(VectorSubtraction, "Vector Subtraction Result: [%d, %d, %d]\n", result[0], result[1], result[2]);
+    DPRINTF(VectorSubtraction, "Vector Subtraction Result: [ %f, %f, %f ]\n", result[0], result[1], result[2]);
 }
 
 }
